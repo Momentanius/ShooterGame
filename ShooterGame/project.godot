@@ -14,6 +14,15 @@ config/name="ShooterGame"
 run/main_scene="res://Scenes/Level 1.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://Scripts/Global.gd"
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Camera"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

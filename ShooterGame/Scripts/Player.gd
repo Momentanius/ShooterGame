@@ -5,6 +5,9 @@ var motion = Vector2() #Vector2 são utilizados para criar movimentação em pla
 const AUTO_SPEED = 100
 const SPEED = 600 #velocidade de movimento do jogador
 
+func _ready():
+	Global.Player = self
+
 
 func _physics_process(delta):
 	move()
@@ -24,6 +27,3 @@ func move():
 		motion.x = -SPEED
 	else:
 		motion.x = 0
-
-func auto_scroll():
-	pass

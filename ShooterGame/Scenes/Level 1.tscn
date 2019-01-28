@@ -1,20 +1,24 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Level1.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Camera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
 
 [node name="Level 1" type="Node2D" index="0"]
 
-[node name="Player" parent="." index="0" instance=ExtResource( 1 )]
+script = ExtResource( 1 )
 
-position = Vector2( 497.228, 530.205 )
+[node name="Camera2D" parent="." index="0" instance=ExtResource( 2 )]
 
-[node name="Camera2D" parent="Player" index="2" instance=ExtResource( 2 )]
-
-position = Vector2( 30.2103, -219.025 )
+position = Vector2( 527.438, 311.18 )
 limit_left = 0
 limit_right = 1024
 limit_bottom = 600
+limit_smoothed = true
 _sections_unfolded = [ "Limit", "Transform" ]
+
+[node name="Player" parent="." index="1" instance=ExtResource( 3 )]
+
+position = Vector2( 497.228, 530.205 )
 
 
