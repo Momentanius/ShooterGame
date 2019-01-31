@@ -6,3 +6,4 @@ func _process(delta):
 
 func auto_scroll():
 	$Camera2D.position.y -= 5
+	$Player.position.y -= 5
