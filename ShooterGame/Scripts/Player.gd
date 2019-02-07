@@ -3,7 +3,7 @@ extends KinematicBody2D
 var motion = Vector2() #Vector2 são utilizados para criar movimentação em planos 2D
 
 const AUTO_SPEED = 100
-const SPEED = 600 #velocidade de movimento do jogador
+var SPEED = 600 #velocidade de movimento do jogador
 
 func _ready():
 	Global.Player = self
@@ -27,3 +27,7 @@ func move():
 		motion.x = -SPEED
 	else:
 		motion.x = 0
+
+func get_player_info():
+	var array_info = [SPEED, AUTO_SPEED, position]
+	return array_info
