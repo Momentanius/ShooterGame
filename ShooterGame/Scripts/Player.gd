@@ -28,6 +28,19 @@ func move():
 	else:
 		motion.x = 0
 
-func get_player_info():
-	var array_info = [SPEED, AUTO_SPEED, position]
-	return array_info
+func collect_item(itemtype):
+	if itemtype == 'speed':
+		var item = Node.new()
+		item.set_name(itemtype)
+		add_child(item)
+		upgrade(itemtype)
+
+func upgrade(item):
+	if item == 'speed':
+		speed_up()
+	else: 
+		print('errorrrr')
+
+func speed_up():
+	SPEED +=300
+	pass
