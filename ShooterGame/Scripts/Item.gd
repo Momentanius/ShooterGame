@@ -3,7 +3,6 @@ extends Area2D
 var item_duration
 var itemType = 'speed'
 
-
 func _ready():
 	pass
 

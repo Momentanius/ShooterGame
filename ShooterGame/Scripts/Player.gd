@@ -7,6 +7,7 @@ var SPEED = 600 #velocidade de movimento do jogador
 
 func _ready():
 	Global.Player = self
+	get_tree().call_group("interface", "update_speed", SPEED)
 
 
 func _physics_process(delta):
@@ -34,6 +35,7 @@ func collect_item(itemtype):
 		item.set_name(itemtype)
 		add_child(item)
 		upgrade(itemtype)
+		get_tree().call_group("interface", "update_speed", SPEED)
 
 func upgrade(item):
 	if item == 'speed':
