@@ -1,2 +1,2 @@
 # ShooterGame
-Spaceship Shooter
+Simple space shooting game developed for studying purpuses. 
