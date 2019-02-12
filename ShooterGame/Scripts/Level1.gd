@@ -1,6 +1,5 @@
 extends Node2D
 
-
 func _process(delta):
 	auto_scroll()
 

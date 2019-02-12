@@ -1,14 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Item.gd" type="Script" id=1]
 [ext_resource path="res://GFX/PNG/Level_Menu/Star_03.png" type="Texture" id=2]
+[ext_resource path="res://SFX/item.ogg" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 120.901
 
-[node name="Item" type="Area2D" index="0"]
+[node name="Item" type="Area2D"]
 
 position = Vector2( 5.85205, -4.54407 )
 scale = Vector2( 0.189772, 0.189772 )
@@ -32,6 +33,17 @@ texture = ExtResource( 2 )
 
 shape = SubResource( 1 )
 
+[node name="SFX" type="AudioStreamPlayer" parent="." index="2"]
+
+stream = ExtResource( 3 )
+volume_db = 5.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
 [connection signal="body_entered" from="." to="." method="_on_Item_body_entered"]
+
+[connection signal="finished" from="SFX" to="." method="_on_SFX_finished"]
 
 

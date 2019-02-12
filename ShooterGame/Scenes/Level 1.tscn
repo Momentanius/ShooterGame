@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Item.tscn" type="PackedScene" id=4]
 
-[node name="Level 1" type="Node2D" index="0"]
+[node name="Level 1" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -24,6 +24,8 @@ position = Vector2( 497.228, 530.205 )
 
 [node name="Items" type="Node2D" parent="." index="2"]
 
+editor/display_folded = true
+
 [node name="Item" parent="Items" index="0" instance=ExtResource( 4 )]
 
 position = Vector2( 285.189, -263.578 )
@@ -31,5 +33,21 @@ position = Vector2( 285.189, -263.578 )
 [node name="Item2" parent="Items" index="1" instance=ExtResource( 4 )]
 
 position = Vector2( 517.51, -672.853 )
+
+[node name="Item3" parent="Items" index="2" instance=ExtResource( 4 )]
+
+position = Vector2( 760.198, -831.855 )
+
+[node name="Item4" parent="Items" index="3" instance=ExtResource( 4 )]
+
+position = Vector2( 341.77, -999.226 )
+
+[node name="Item5" parent="Items" index="4" instance=ExtResource( 4 )]
+
+position = Vector2( 559.353, -1152.65 )
+
+[node name="Item6" parent="Items" index="5" instance=ExtResource( 4 )]
+
+position = Vector2( 325.033, -1392.55 )
 
 
