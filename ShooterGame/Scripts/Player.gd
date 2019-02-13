@@ -3,6 +3,7 @@ extends KinematicBody2D
 var motion = Vector2() #Vector2 são utilizados para criar movimentação em planos 2D
 
 var can_shoot = true
+var totalPoints = 0
 
 const AUTO_SPEED = 100
 const bullet_laser = preload("res://Tiro.tscn")
@@ -10,7 +11,7 @@ var SPEED = 600 #velocidade de movimento do jogador
 
 func _ready():
 	Global.Player = self
-	get_tree().call_group("interface", "update_speed", SPEED)
+	get_tree().call_group("interface", "getPoints", totalPoints)
 
 
 func _physics_process(delta):
@@ -19,6 +20,8 @@ func _physics_process(delta):
 
 func _process(delta):
 	shoot()
+
+
 
 func move():
 	if Input.is_action_pressed("ui_up") and not Input.is_action_pressed("ui_down"):
@@ -44,22 +47,12 @@ func shoot():
 			get_parent().add_child(bullet) #adiciona a bala como criança de player.
 
 func collect_item(itemtype):
-	if itemtype == 'speed':
 		var item = Node.new()
-		item.set_name(itemtype)
 		add_child(item)
-		upgrade(itemtype)
-		get_tree().call_group("interface", "update_speed", SPEED)
-
-func upgrade(item):
-	if item == 'speed':
-		speed_up()
-	else: 
-		print('errorrrr')
-
-func speed_up():
-	if SPEED < 1200:
-		SPEED +=150 
+		totalPoints += 100
+		get_tree().call_group("interface", "getPoints", totalPoints)
+		get_tree().call_group("Speed", "speed_up")
 		
+
 func _on_Timer_timeout():
 	can_shoot = true
