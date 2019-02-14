@@ -7,7 +7,7 @@ var totalPoints = 0
 
 const AUTO_SPEED = 100
 const bullet_laser = preload("res://Tiro.tscn")
-var SPEED = 600 #velocidade de movimento do jogador
+var SPEED = 300 #velocidade de movimento do jogador
 
 func _ready():
 	Global.Player = self
@@ -20,8 +20,6 @@ func _physics_process(delta):
 
 func _process(delta):
 	shoot()
-
-
 
 func move():
 	if Input.is_action_pressed("ui_up") and not Input.is_action_pressed("ui_down"):
