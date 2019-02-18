@@ -23,6 +23,9 @@ func _physics_process(delta):
 func _process(delta):
 	shoot()
 
+func dash():
+	pass
+
 func move():
 	if Input.is_action_pressed("ui_up") and not Input.is_action_pressed("ui_down"):
 		motion.y = -SPEED
@@ -52,6 +55,7 @@ func collect_item(itemtype):
 		totalPoints += 100
 		get_tree().call_group("interface", "getPoints", totalPoints)
 		get_tree().call_group("Speed", "speed_up")
+		$AudioStreamPlayer.stream = load(Global.item_sfx)
 		$AudioStreamPlayer.play()
 		
 
@@ -60,9 +64,10 @@ func damage(number):
 		get_tree().call_group("Speed", "gameOver")
 	else:
 		if canTakeDamage:
+			$AudioStreamPlayer.stream = load(Global.hurt_sfx)
+			$AudioStreamPlayer.play()
 			lifeTotal-=1
 			brief_invincibility()
-		
 
 func brief_invincibility():
 	canTakeDamage = false
@@ -71,7 +76,6 @@ func brief_invincibility():
 
 func _on_Timer_timeout():
 	can_shoot = true
-
 
 func _on_TimerDamage_timeout():
 	canTakeDamage = true
