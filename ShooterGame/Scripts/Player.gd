@@ -4,6 +4,8 @@ var motion = Vector2() #Vector2 são utilizados para criar movimentação em pla
 
 var can_shoot = true
 var totalPoints = 0
+var lifeTotal = 3
+var canTakeDamage = true
 
 const AUTO_SPEED = 100
 const bullet_laser = preload("res://Tiro.tscn")
@@ -50,7 +52,26 @@ func collect_item(itemtype):
 		totalPoints += 100
 		get_tree().call_group("interface", "getPoints", totalPoints)
 		get_tree().call_group("Speed", "speed_up")
+		$AudioStreamPlayer.play()
 		
+
+func damage(number):
+	if lifeTotal <= 0:
+		get_tree().call_group("Speed", "gameOver")
+	else:
+		if canTakeDamage:
+			lifeTotal-=1
+			brief_invincibility()
+		
+
+func brief_invincibility():
+	canTakeDamage = false
+	$TimerDamage.start()
+	$AnimationPlayer.play("Damage")
 
 func _on_Timer_timeout():
 	can_shoot = true
+
+
+func _on_TimerDamage_timeout():
+	canTakeDamage = true
