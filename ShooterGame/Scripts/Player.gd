@@ -6,6 +6,8 @@ var can_shoot = true
 var totalPoints = 0
 var lifeTotal = 3
 var canTakeDamage = true
+var dash_count = 0
+var dashing = false
 
 const AUTO_SPEED = 100
 const bullet_laser = preload("res://Tiro.tscn")
@@ -23,8 +25,13 @@ func _physics_process(delta):
 func _process(delta):
 	shoot()
 
-func dash():
-	pass
+func dash(direction):
+	if direction == 'right' and not dashing:
+		dashing = true
+		global_position.x += 200
+	if direction == 'left' and not dashing:
+		dashing = true
+		global_position.x -= 200
 
 func move():
 	if Input.is_action_pressed("ui_up") and not Input.is_action_pressed("ui_down"):
@@ -34,15 +41,31 @@ func move():
 	else:
 		motion.y = 0
 	if Input.is_action_pressed("ui_right") and not Input.is_action_pressed("ui_left"):
-		motion.x = SPEED
+		if dash_count < 2:
+			motion.x = SPEED
+		else:
+			dash('right')
 	elif Input.is_action_pressed("ui_left") and not Input.is_action_pressed("ui_right"): 
-		motion.x = -SPEED
+		if dash_count < 2:
+			motion.x = -SPEED
+		else:
+			dash('left')
 	else:
 		motion.x = 0
+	
+	if Input.is_action_just_pressed("ui_right") and not Input.is_action_just_pressed("ui_left"):
+		if dash_count < 2:
+			dash_count+=1
+			$TimerDash.start()
+	if Input.is_action_just_pressed("ui_left") and not Input.is_action_just_pressed("ui_right"):
+		if dash_count < 2:
+			dash_count+=1
+			$TimerDash.start()
+	
 
 func shoot():
 	if can_shoot:
-		if Input.is_action_pressed('ui_shoot'):
+		if Input.is_action_just_pressed('ui_shoot'):
 			can_shoot = false
 			$Timer.start()
 			var bullet = bullet_laser.instance() #Instancia a bala como um novo item
@@ -79,3 +102,8 @@ func _on_Timer_timeout():
 
 func _on_TimerDamage_timeout():
 	canTakeDamage = true
+
+
+func _on_TimerDash_timeout():
+	dashing = false
+	dash_count-=2

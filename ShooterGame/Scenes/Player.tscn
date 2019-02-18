@@ -67,7 +67,14 @@ wait_time = 2.0
 one_shot = true
 autostart = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+[node name="TimerDash" type="Timer" parent="." index="4"]
+
+process_mode = 1
+wait_time = 0.5
+one_shot = true
+autostart = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 
 root_node = NodePath("..")
 autoplay = ""
@@ -77,7 +84,7 @@ playback_speed = 1.0
 anims/Damage = SubResource( 2 )
 blend_times = [  ]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="5"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
 
 stream = ExtResource( 3 )
 volume_db = 0.0
@@ -89,5 +96,7 @@ bus = "Master"
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 [connection signal="timeout" from="TimerDamage" to="." method="_on_TimerDamage_timeout"]
+
+[connection signal="timeout" from="TimerDash" to="." method="_on_TimerDash_timeout"]
 
 
