@@ -28,10 +28,10 @@ func _process(delta):
 func dash(direction):
 	if direction == 'right' and not dashing:
 		dashing = true
-		global_position.x += 200
+		motion.x += 600
 	if direction == 'left' and not dashing:
 		dashing = true
-		global_position.x -= 200
+		motion.x -= 600
 
 func move():
 	if Input.is_action_pressed("ui_up") and not Input.is_action_pressed("ui_down"):
@@ -45,11 +45,13 @@ func move():
 			motion.x = SPEED
 		else:
 			dash('right')
+			$Sprite.play('dash')
 	elif Input.is_action_pressed("ui_left") and not Input.is_action_pressed("ui_right"): 
 		if dash_count < 2:
 			motion.x = -SPEED
 		else:
 			dash('left')
+			$Sprite.play('dash')
 	else:
 		motion.x = 0
 	
@@ -107,3 +109,4 @@ func _on_TimerDamage_timeout():
 func _on_TimerDash_timeout():
 	dashing = false
 	dash_count-=2
+	$Sprite.play('idle')
